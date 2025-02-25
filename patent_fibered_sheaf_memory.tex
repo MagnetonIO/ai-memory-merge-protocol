@@ -1,0 +1,162 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{hyperref}
+\setstretch{1.2}
+
+\title{Patent Application: \\
+       Systems and Methods for Integrating \\
+       Ephemeral Memory, Fibered-Sheaf Merge, \\
+       and Research Ingestion Pipelines}
+\author{Inventor: Matthew Long \\
+        Assignee: Magneton Labs}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+{\Large \textbf{PATENT APPLICATION}}
+\end{center}
+
+\section*{CROSS-REFERENCE TO RELATED APPLICATIONS}
+This application claims priority to and the benefit of any relevant provisional 
+applications (if applicable). Reference is made to concurrently filed or 
+previously filed applications, including (List them if any).
+
+\section*{FIELD OF THE INVENTION}
+The present invention relates generally to systems and methods of knowledge management 
+in artificial intelligence, and more particularly, to integrating ephemeral memory 
+storage with a fibered-sheaf merging approach, combined with an automated ingestion 
+pipeline for research documents.
+
+\section*{BACKGROUND}
+Modern AI requires robust memory architectures to store both transient user interaction data 
+and stable, high-volume knowledge from research papers, technical documents, or user-provided 
+content. Conventional approaches either (i) discard ephemeral data after a short period or 
+(ii) merge ephemeral data into a knowledge base using simplistic conflict resolution. These 
+limitations cause data loss and hamper accurate knowledge representation.
+
+Attempts to integrate ephemeral chat logs with knowledge graphs often face contradictions 
+(e.g., multiple versions of a fact). Existing solutions typically overwrite conflicting versions, 
+resulting in possible misrepresentations. Moreover, ingesting large-scale research collections 
+into the same knowledge store introduces further complexities in reconciling ephemeral user statements 
+with authoritative external documents.
+
+\section*{SUMMARY OF THE INVENTION}
+Embodiments of the present invention provide a novel system and method that:
+\begin{enumerate}
+  \item Captures ephemeral (short-term) memory using a lightweight data layer (e.g., mem0).
+  \item Merges ephemeral data into a persistent knowledge graph via a fibered-sheaf protocol,
+        preserving parallel states for conflicting information.
+  \item Integrates an automated ingestion workflow (AI Preprint Forge) that processes 
+        research documents, extracting references, metadata, and text, thus unifying ephemeral 
+        user queries with stable academic sources.
+\end{enumerate}
+
+Through the fibered-sheaf methodology, contradictory data is not immediately discarded or 
+overwritten. Instead, the system either resolves conflicts via preconfigured rules (confidence, 
+timestamp, user override) or preserves them as separate branches to be reconciled if and 
+when further evidence emerges. 
+
+\section*{BRIEF DESCRIPTION OF THE DRAWINGS}
+No formal drawings are provided in this example, but one skilled in the art may
+prepare block diagrams illustrating:
+\begin{enumerate}
+  \item The mem0 ephemeral memory subsystem,
+  \item The fibered-sheaf merge engine,
+  \item The AI Preprint Forge ingestion pipeline,
+  \item Communication between these components and the knowledge graph database.
+\end{enumerate}
+
+\section*{DETAILED DESCRIPTION OF THE INVENTION}
+
+\subsection*{System Overview}
+An embodiment includes three major components:
+\begin{itemize}
+  \item \textbf{Ephemeral Memory Layer (mem0):} Stores chat logs or short-lived data
+        in a raw JSON format with minimal indexing, allowing quick write/read operations.
+  \item \textbf{Fibered-Sheaf Merge Engine:} Periodically or on-demand, this engine
+        fetches ephemeral entries, maps them to relevant nodes in the knowledge graph,
+        checks for data consistency, and merges or branches data accordingly.
+  \item \textbf{Research Ingestion (AI Preprint Forge):} Processes large documents (PDFs,
+        text, or otherwise) to extract structured metadata. Summaries or references are 
+        then used in the knowledge graph, enabling cross-referencing with ephemeral chat logs.
+\end{itemize}
+
+\subsection*{Fibered-Sheaf Conflict Resolution}
+The invention leverages a “fibered-sheaf” data structure, wherein each knowledge node can
+include one or more possible states (fibers). When ephemeral data conflicts with existing
+states:
+\begin{itemize}
+  \item Automatic rules (e.g., time-based, confidence-based) may unify one version.
+  \item If no rule resolves the conflict, the system retains multiple states in separate
+        fibers, which remain accessible for future queries or merges.
+\end{itemize}
+
+\subsection*{API and Data Flow}
+The invention includes an API that exposes:
+\begin{enumerate}
+  \item \texttt{POST /mem0/entries} - store ephemeral data,
+  \item \texttt{POST /fs-merge} - initiate or schedule a fibered-sheaf merge,
+  \item \texttt{POST /preprint-forge/ingest} - ingest a research document for analysis.
+\end{enumerate}
+Data then flows into the knowledge graph, updated in real-time or batch processes.
+
+\subsection*{Advantages and Use Cases}
+\begin{itemize}
+  \item \textbf{Preservation of Conflicting Data:} Ensures alternative versions are kept 
+        until more information is available, improving reliability.
+  \item \textbf{Context-Aware Research Assistance:} Merging ephemeral queries with 
+        preprint data helps produce context-rich answers and fosters better Q\&A experiences.
+  \item \textbf{Scalability:} The layered approach allows ephemeral data to be gradually 
+        distilled or summarized and then integrated with large knowledge corpora.
+\end{itemize}
+
+\section*{CLAIMS}
+\begin{enumerate}
+\item \textbf{A system for integrating ephemeral memory with a persistent knowledge graph,}
+comprising:
+\begin{enumerate}
+  \item an ephemeral memory layer configured to store incoming user data in a short-term format,
+  \item a fibered-sheaf merge engine configured to retrieve said short-term data and check 
+        for conflicts with existing nodes in a knowledge graph, and
+  \item a resolution module configured to unify or branch conflicting data states.
+\end{enumerate}
+
+\item \textbf{The system of claim 1,} wherein the merge engine applies confidence scores or
+timestamps as part of an automatic resolution method.
+
+\item \textbf{The system of claim 1,} further comprising an ingestion subsystem configured
+to parse research documents and add derived metadata into the knowledge graph.
+
+\item \textbf{The system of claim 1,} wherein if conflicting data cannot be resolved automatically,
+parallel states are preserved in the knowledge graph for future reconciliation.
+
+\item \textbf{A method of operating the system of claim 1,} comprising:
+\begin{enumerate}
+  \item receiving ephemeral data from a user session,
+  \item identifying one or more corresponding nodes in the knowledge graph,
+  \item determining whether data conflicts exist between ephemeral data and existing node states,
+  \item applying a fibered-sheaf merge procedure to automatically unify or branch data, 
+        thereby ensuring no loss of conflicting information, and
+  \item exposing an API allowing external systems or users to query or update the knowledge graph 
+        with ephemeral data or external research content.
+\end{enumerate}
+\end{enumerate}
+
+\section*{ABSTRACT}
+A system and method integrate ephemeral data stored in a lightweight memory layer with a
+persistent knowledge graph using a fibered-sheaf protocol. Conflicting data states are
+either resolved or preserved for future resolution, ensuring minimal loss of information.
+An ingestion pipeline automatically processes large research documents to update the graph
+with stable, high-confidence data. The invention improves AI memory fidelity and
+enhances research-based user interactions.
+
+\section*{CONCLUSION}
+The above description details various embodiments of the invention. Variations
+and modifications can be made by one skilled in the art without departing from
+the scope and spirit of the invention, as set forth in the appended claims.
+
+\end{document}
